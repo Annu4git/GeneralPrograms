@@ -1,0 +1,27 @@
+import java.time.LocalDateTime;
+
+/**
+ * 
+ */
+
+/**
+ * @author 764911
+ *
+ */
+public class FindDay {
+
+	public static void main(String[] args) {
+		LocalDateTime Feb10_2015 = LocalDateTime.of(2015, 2, 10, 0, 0);
+		LocalDateTime Feb10_2016 = LocalDateTime.of(2016, 2, 10, 0, 0);
+		
+		System.out.println("Feb 10, 2015 : " + Feb10_2015);
+		LocalDateTime next30_in2015 = Feb10_2015.plusDays(30);
+		System.out.println("After 30 days : " + next30_in2015);
+		
+		System.out.println();
+		System.out.println("Feb 10, 2016 : " + Feb10_2016);
+		LocalDateTime next30_in2016 = Feb10_2016.plusDays(30);
+		System.out.println("After 30 days : " + next30_in2016);
+	}
+
+}

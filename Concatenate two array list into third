@@ -1,0 +1,41 @@
+//concatenate two array list into third
+package list;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ArrayListTest {
+	public static void main(String[] args) {
+		List<String> firstNames = getFirstNames();
+		List<String> lastNames = getLastNames();
+		List<String> names = new ArrayList<String>();
+		
+		for(int i = 0; i < firstNames.size(); i++) {
+			names.add(firstNames.get(i) + " " + lastNames.get(i));
+		}
+		
+		System.out.println(names);
+	}
+	
+	public static List<String> getFirstNames() {
+		List<String> firstNames = new ArrayList<>();
+		firstNames.add("Anurag");
+		firstNames.add("Viraj");
+		firstNames.add("Varun");
+		firstNames.add("Akshay");
+		firstNames.add("Chakshu");
+		
+		return firstNames;
+	}
+	
+	public static List<String> getLastNames() {
+		List<String> lastNames = new ArrayList<>();
+		lastNames.add("Chaturvedi");
+		lastNames.add("Shah");
+		lastNames.add("Gogia");
+		lastNames.add("Singhal");
+		lastNames.add("Goel");
+		
+		return lastNames;
+	}
+}

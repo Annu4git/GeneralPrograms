@@ -1,0 +1,44 @@
+package simple;
+
+public class RotatingString {
+
+	public static void main(String[] args) {
+		String s1 = "abcdaef";
+		String s2 = "daefabc";
+		
+		System.out.println(s1.indexOf('z'));
+		
+		if(s1.length() != s2.length()) {
+			System.out.println("Non rotating strings because differ in length");
+		} else {
+			int match = 0; 
+			
+			for (int i = 0; i < s1.length(); i++) {
+				int j = i;
+				match = 0;
+				for(int k = 0; k < s1.length(); k++) {
+					if (s1.charAt(j) != s2.charAt(k)) {
+						break;
+					} else {
+						match++;
+					}
+					j++;
+					if(j == s1.length()) {
+						j = 0;
+					}
+				}
+				
+				if(match == s1.length()) {
+					break;
+				}
+			}
+			
+			if(match != s1.length()){
+				System.out.println("Non rotating strings");
+			}
+			else {
+				System.out.println("Rotating Strings");
+			}
+		}
+	}
+}

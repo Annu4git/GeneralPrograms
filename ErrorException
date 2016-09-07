@@ -1,0 +1,19 @@
+package simple;
+
+public class ErrorException {
+
+	public static void main(String[] args) {
+		
+		try {
+			int a = 5/0;
+		} catch (Error e) {
+			System.out.println("In error");
+		} catch (Exception e) {
+			System.out.println("In exception");
+		} catch (Throwable e) {
+			System.out.println("In error");
+		}
+
+	}
+
+}

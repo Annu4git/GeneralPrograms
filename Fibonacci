@@ -1,0 +1,33 @@
+package simple;
+
+public class Fibonacci {
+
+	public static void main(String[] args) {
+		printFibonacci(9);
+	}
+	
+	public static void printFibonacci(int last) {
+		if(last < 0) {
+			System.err.println("Invalid input");
+		} else if(last == 0){
+			System.out.print(last);
+		} else if(last == 1) {
+			System.out.print(0 + " " + 1 + " ");
+		} else {
+			System.out.print(0 + " " + 1 + " ");
+			fibonacci(0, 1, last);
+		}
+	}
+	
+	public static void fibonacci(int first, int second, int last) {
+		int third = first + second;
+		
+		if(third > last) {
+			return;
+		} else {
+			System.out.print(third + " ");
+			fibonacci(second, third, last);
+		}
+	}
+
+}

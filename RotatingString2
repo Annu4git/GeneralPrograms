@@ -1,0 +1,38 @@
+package simple;
+
+public class RotatingString1 {
+
+	public static void main(String[] args) {
+		String s1 = "abcdaef";
+		String s2 = "daefabc";
+		
+		if(s1.length() != s2.length()) {
+			System.out.println("Non rotating strings because differ in length");
+		} else {
+			char firstChar = s1.charAt(0);
+			int beginIndex = 0;
+			int endIndex = s2.length();
+			int flag = 0;
+			while (true) {
+				int matchIndex = beginIndex + s2.substring(beginIndex, endIndex).indexOf(firstChar);
+				
+				if(matchIndex == -1) {
+					break;
+				}
+				
+				if(s2.substring(matchIndex, endIndex).equals(s1.substring(0, endIndex - matchIndex)) 
+						&& 
+					(s2.substring(0, endIndex - matchIndex + 1).equals(s1.substring(endIndex - matchIndex, endIndex)))) {
+					flag = 1;
+					break;
+				}
+				
+				beginIndex = matchIndex + 1;
+			}
+			
+			if(flag == 1) {
+				System.out.println("Rotating Strings");
+			}
+		}
+	}
+}

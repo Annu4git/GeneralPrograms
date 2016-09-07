@@ -1,0 +1,51 @@
+package simple;
+
+public class MyThread extends Thread {
+
+	public void run() {
+			System.out.println("run starts for :" + this.getName());
+			
+			try {
+				Thread.sleep(500);
+			} catch(InterruptedException e) {
+				System.out.println("in catch");
+			}
+			
+			System.out.println("run ends for :" + this.getName());
+	}
+	
+	public static void main(String[] args) {
+		
+		//Thread.currentThread().setName("Main");
+		
+		System.out.println("Main method starts ");
+		
+		MyThread t1 = new MyThread();
+		t1.setName("T1");
+		MyThread t2 = new MyThread();
+		t2.setName("T2");
+		
+		t1.start();
+		t2.start();
+		
+		try {
+			t1.join();
+
+		} catch (InterruptedException e) {
+			
+		}
+
+		//System.out.println("This will print when T1 ends");
+		
+		
+		
+	/*	try {
+			t2.join();
+
+		} catch (InterruptedException e) {
+			
+		}*/
+		
+		System.out.println("main method ends");
+	}
+}

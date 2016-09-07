@@ -1,0 +1,18 @@
+package simple;
+
+public class RotatingString3 {
+
+	public static void main(String[] args) {
+		String s1 = "anurag";
+		String s2 = "uragan";
+		
+		if((s1.length() == s2.length()) && ((s1 + s2).indexOf(s2) != -1)) {
+			System.out.println("Rotating strings");
+		} else 
+		{
+			System.out.println("Non rotating strings");
+		}
+
+	}
+
+}

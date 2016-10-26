@@ -1,0 +1,33 @@
+package simple;
+
+public class StringContainsString {
+
+	public static void main(String[] args) {
+		
+		String s1 = "Chaturvedi";
+		String s2 = "idev";
+		boolean flag = false;
+		
+		if(s1.contains(s2)) {
+			flag = true;
+		} else {
+			//s2 = new StringBuilder().append(s2).reverse().toString();
+			StringBuilder s3 = new StringBuilder();
+			s3 = s3.append(s2);
+			s3 = s3.reverse();
+			s2 = s3.toString();
+			
+			if(s1.contains(s2)) {
+				flag = true;
+			}
+		}
+		
+		if(flag == true) {
+			System.out.println("True");
+		} else {
+			System.out.println("False");
+		}
+
+	}
+
+}

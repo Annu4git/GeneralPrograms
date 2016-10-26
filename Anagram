@@ -1,0 +1,44 @@
+package Strings;
+
+public class Anagrams {
+
+	public static void main(String[] args) {
+		String s1 = "varun";
+		String s2 = "runav";
+		
+		s1 = s1.toUpperCase();
+		s2 = s2.toUpperCase();
+		
+		int a[] = new int[26];
+		int b[] = new int[26];
+		int temp = 0;
+		
+		int i = 0;
+		while(i < s1.length()) {
+			temp = s1.charAt(i);
+			a[temp-65]++;
+			i++;
+		}
+		
+		i = 0;
+		while(i < s2.length()) {
+			temp = s2.charAt(i);
+			b[temp-65]++;
+			i++;
+		}
+		
+		int flag = 1;
+		for(int j = 0; j < 26; j++) {
+			if(a[j] != b[j]) {
+				flag = 0;
+				break;
+			}
+		}
+		
+		if(flag == 1) {
+			System.out.println(s1 + " and " + s2 + " are Anagrams");
+		} else {
+			System.out.println(s1 + " and " + s2 + " are not Anagrams");
+		}
+	}
+}

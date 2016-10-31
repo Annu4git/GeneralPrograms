@@ -1,0 +1,329 @@
+package tictactoe;
+
+import java.awt.*;
+
+import javax.swing.*;
+
+import java.awt.event.*;
+
+public class TicTacToe implements ActionListener {
+	
+	private static int count = 0;
+	private static String symbol = "";
+	private static String player1Symbol = "0";
+	private static String player2Symbol = "X";
+	
+	private JFrame window = new JFrame("tictactoe");
+	
+	private JButton[] button = new JButton[9];
+	
+	public void init()
+	{
+		//Create window
+		window.setSize(150, 150);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setLayout(new GridLayout(3,3));
+		
+		//Set the visibility of window to true
+		window.setVisible(true);
+				
+		
+		//create buttons
+		for(int i = 0; i < 9; i++)
+		{
+			button[i] = new JButton("");
+		}
+		
+		//Add buttons to the window
+		for(int i = 0; i < 9; i++)
+		{
+			window.add(button[i]);
+		}
+	}
+	
+	public TicTacToe()
+	{
+		init();
+		
+		//Add the Action Listener to the buttons
+		
+		for(int i = 0; i < 9; i++)
+		{
+			button[i].addActionListener(this);
+			button[i].setBackground(Color.white);
+		}
+		
+		chooseFirstPlayer();
+	}
+
+	public void chooseFirstPlayer()
+	{
+		String input = JOptionPane.showInputDialog("Please select : 0 or 1(for X)");
+		
+		while(input == null || input.equals(""))
+		{
+			input = JOptionPane.showInputDialog("Please select : 0 or 1(for X)");
+		}
+		
+		while(!(input.equals("1") || input.equals("0")))
+		{
+			JOptionPane.showConfirmDialog(window, "Please give either 0 or 1 as input", "Give right input", 2);
+			input = JOptionPane.showInputDialog("Please select : 0 or 1(for X)");
+		}
+		
+		int pawn = Integer.parseInt(input);
+		
+		if(pawn == 0)
+		{
+			player1Symbol = "0";
+			player2Symbol = "X";
+		}
+		else if(pawn == 1)
+		{
+			player1Symbol = "X";
+			player2Symbol = "0";
+		}
+	}
+	
+	public static void main(String[] args) {
+		new TicTacToe();
+
+	}
+
+	public void reset()
+	{
+		for(int i = 0; i<9; i++)
+		{
+			button[i].setText("");
+			button[i].setEnabled(true);
+			button[i].setBackground(Color.white);
+		}
+		count = 0;
+		chooseFirstPlayer();	
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		count++;
+		
+		//Calculate turn of the player
+		if(count == 1 || count == 3 || count == 5 || count == 7 || count == 9)
+		{
+			symbol = player1Symbol;
+		}
+		else if(count == 2 || count == 4 || count == 6 || count == 8)
+		{
+			symbol = player2Symbol;
+		}
+		
+		//Display symbol on the button
+		for(int i = 0; i < 9; i++)
+		{
+			if(e.getSource() == button[i])
+			{
+				button[i].setText(symbol);
+				button[i].setEnabled(false);
+			}
+		}
+		
+		if(count >= 5)
+		{
+			int player = checkWinner();
+			
+			if(count == 9 && player == 0)
+			{
+				for(int i = 0; i < button.length; i++)
+				{
+					button[i].setBackground(Color.pink);
+				}
+				JOptionPane.showConfirmDialog(window, "Match draw", "Game over", 2);
+				reset();
+			}
+			
+			if(player == 1)
+			{
+				JOptionPane.showConfirmDialog(window, "Player 1 won", "Game over", 2);  //showOutputDialog("Please select : 0 or X");
+				reset();
+				
+			}
+			else if(player == 2)
+			{
+				JOptionPane.showConfirmDialog(window, "Player 2 won", "Game over", 2);  //showOutputDialog("Please select : 0 or X");
+				reset();
+			}
+		}
+	}
+	
+	public int checkWinner()
+	{
+		int player = 0;
+		
+		if(button[0].getText().equals(button[1].getText()) && button[0].getText().equals(button[2].getText()))
+		{
+			if(button[0].getText() == player1Symbol)
+			{
+				player = 1;
+				
+				button[0].setBackground(Color.cyan);
+				button[1].setBackground(Color.cyan);
+				button[2].setBackground(Color.cyan);
+				
+			}
+			if(button[0].getText() == player2Symbol)
+			{
+				player = 2;
+				
+				button[0].setBackground(Color.cyan);
+				button[1].setBackground(Color.cyan);
+				button[2].setBackground(Color.cyan);
+				
+			}
+		}
+		else if(button[0].getText().equals(button[3].getText()) && button[0].getText().equals(button[6].getText()))
+		{
+			if(button[0].getText() == player1Symbol)
+			{
+				player = 1;
+				button[0].setBackground(Color.cyan);
+				button[3].setBackground(Color.cyan);
+				button[6].setBackground(Color.cyan);
+			}
+			if(button[0].getText() == player2Symbol)
+			{
+				player = 2;
+				button[0].setBackground(Color.cyan);
+				button[3].setBackground(Color.cyan);
+				button[6].setBackground(Color.cyan);
+				
+			}
+		}
+		else if(button[0].getText().equals(button[4].getText()) && button[0].getText().equals(button[8].getText()))
+		{
+			if(button[0].getText() == player1Symbol)
+			{
+				player = 1;
+				button[0].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+			if(button[0].getText() == player2Symbol)
+			{
+				player = 2;
+				button[0].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+		}
+		else if(button[1].getText().equals(button[4].getText()) && button[1].getText().equals(button[7].getText()))
+		{
+			if(button[1].getText() == player1Symbol)
+			{
+				player = 1;
+				button[1].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[7].setBackground(Color.cyan);
+			}
+			if(button[1].getText() == player2Symbol)
+			{
+				player = 2;
+				button[1].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[7].setBackground(Color.cyan);
+			}
+		}
+		else if(button[2].getText().equals(button[5].getText()) && button[2].getText().equals(button[8].getText()))
+		{
+			if(button[2].getText() == player1Symbol)
+			{
+				player = 1;
+				button[2].setBackground(Color.cyan);
+				button[5].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+			if(button[2].getText() == player2Symbol)
+			{
+				player = 2;
+				button[2].setBackground(Color.cyan);
+				button[5].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+		}
+		else if(button[2].getText().equals(button[4].getText()) && button[2].getText().equals(button[6].getText()))
+		{
+			if(button[2].getText() == player1Symbol)
+			{
+				player = 1;
+				button[2].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[6].setBackground(Color.cyan);
+			}
+			if(button[2].getText() == player2Symbol)
+			{
+				player = 2;
+				button[2].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[6].setBackground(Color.cyan);
+			}
+		}
+		else if(button[3].getText().equals(button[4].getText()) && button[3].getText().equals(button[5].getText()))
+		{
+			if(button[3].getText() == player1Symbol)
+			{
+				player = 1;
+				button[3].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[5].setBackground(Color.cyan);
+			}
+			if(button[3].getText() == player2Symbol)
+			{
+				player = 2;
+				button[3].setBackground(Color.cyan);
+				button[4].setBackground(Color.cyan);
+				button[5].setBackground(Color.cyan);
+			}
+		}
+		else if(button[6].getText().equals(button[7].getText()) && button[6].getText().equals(button[8].getText()))
+		{
+			if(button[6].getText() == player1Symbol)
+			{
+				player = 1;
+				button[6].setBackground(Color.cyan);
+				button[7].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+			if(button[6].getText() == player2Symbol)
+			{
+				player = 2;
+				button[6].setBackground(Color.cyan);
+				button[7].setBackground(Color.cyan);
+				button[8].setBackground(Color.cyan);
+			}
+		}
+		
+		return player;
+	}
+
+}
+
+
+
+class C1
+{
+	
+	{
+		//Code
+	}
+	C1(int i)
+	{
+		//Code
+	}
+	C1(float f)
+	{
+		//Code
+	}
+	C1(String s)
+	{
+		//Code
+	}
+	
+}

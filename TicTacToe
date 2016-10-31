@@ -304,26 +304,3 @@ public class TicTacToe implements ActionListener {
 	}
 
 }
-
-
-
-class C1
-{
-	
-	{
-		//Code
-	}
-	C1(int i)
-	{
-		//Code
-	}
-	C1(float f)
-	{
-		//Code
-	}
-	C1(String s)
-	{
-		//Code
-	}
-	
-}
